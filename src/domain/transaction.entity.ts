@@ -1,8 +1,14 @@
 import {EntityAbstract, EntityProps} from "../@shared/domain/entity.abstract";
-import {PixKey} from "./pix-key.entity";
 import {PixKeyValueObject} from "./vo/pix-key.vo";
 
 export namespace Transaction {
+
+    export enum Status {
+        CREATING = 0,
+        CONFIRMED = 1,
+        PROCESSED = 2,
+        COMPLETED = 2,
+    }
 
     export type Props = {
         bank: string;
@@ -10,6 +16,7 @@ export namespace Transaction {
         description: string;
         value: number;
         pixKey: PixKeyValueObject.ValueObject;
+        status: Status | null;
     };
 
     export class Entity extends EntityAbstract {
@@ -18,7 +25,7 @@ export namespace Transaction {
         protected _description: string;
         protected _value: number;
         protected _pixKey: PixKeyValueObject.ValueObject;
-        protected _key: string;
+        protected _status: Transaction.Status
 
         constructor(props: Transaction.Props & EntityProps) {
             super(props);
@@ -27,6 +34,7 @@ export namespace Transaction {
             this._description = props.description;
             this._value = props.value;
             this._pixKey = props.pixKey;
+            this._status = props.status ?? Transaction.Status.CREATING;
         }
     }
 
