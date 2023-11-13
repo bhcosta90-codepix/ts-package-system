@@ -29,7 +29,7 @@ export namespace Transaction {
         protected _description: string;
         protected _value: number;
         protected _pixKey: PixKeyValueObject.ValueObject;
-        private _status: Transaction.Status
+        protected _status: Transaction.Status
 
         constructor(props: Transaction.Props & EntityProps) {
             super(props);
