@@ -32,7 +32,7 @@ export namespace PixKey {
         constructor(props: Props & EntityProps) {
             super(props);
 
-            this._kind = getKind(props.kind);
+            this._kind = props.kind = getKind(props.kind);
 
             let value = props.key;
 
@@ -47,7 +47,7 @@ export namespace PixKey {
                     break;
             }
 
-            this._key = value;
+            this._key = props.key = value;
         }
 
 
@@ -57,6 +57,29 @@ export namespace PixKey {
 
         get key(): string {
             return this._key;
+        }
+    }
+
+    export class Factory {
+        private _kind: number = 3;
+        private _key: string = 'test@test.com';
+
+
+        withKind(value: number): this {
+            this._kind = value;
+            return this;
+        }
+
+        withKey(value: string): this {
+            this._key = value;
+            return this;
+        }
+
+        make(): PixKey.Entity {
+            return new PixKey.Entity({
+                kind: this._kind,
+                key: this._key,
+            });
         }
     }
 }

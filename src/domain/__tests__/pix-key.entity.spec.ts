@@ -53,5 +53,27 @@ describe("PixKey.Entity Unit Test", () => {
         expect(entity.key).toBe("test@test.com");
         expect(entity.kind).toBe(PixKey.Kind.EMAIL);
         expect(entity).toBeInstanceOf(EntityAbstract)
+    });
+
+    describe("Factory entity", () => {
+        test("creating a simple factory entity", () => {
+            const entity = new PixKey.Factory().make();
+            expect(entity.toJSON()).toMatchObject({
+                kind: 3,
+                key: 'test@test.com',
+            });
+        });
+
+        test("creating a factory entity with data", () => {
+            const entity = new PixKey.Factory()
+                .withKind(2)
+                .withKey('(19) 98870-4040')
+                .make();
+
+            expect(entity.toJSON()).toMatchObject({
+                kind: 2,
+                key: '19988704040',
+            });
+        })
     })
 })

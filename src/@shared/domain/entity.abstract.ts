@@ -8,8 +8,14 @@ export abstract class EntityAbstract<PropsConstructor = any> implements EntityIn
 
     protected constructor(protected readonly props: PropsConstructor & EntityProps) {
         this._id = this.props.id ?? randomUUID();
-        this._created_at = new Date(this.props.created_at);
-        this._updated_at = new Date(this.props.updated_at);
+
+        this._created_at = this.props.created_at
+            ? new Date(this.props.created_at)
+            : new Date();
+
+        this._updated_at = this.props.updated_at
+            ? new Date(this.props.updated_at)
+            : new Date();
     }
 
     get id(): string {
@@ -27,8 +33,8 @@ export abstract class EntityAbstract<PropsConstructor = any> implements EntityIn
     toJSON(): Required<{ id: string, created_at: string, updated_at: string } & PropsConstructor> {
         return {
             id: this.id.toString(),
-            created_at: this.created_at.toString(),
-            updated_at: this.updated_at.toString(),
+            created_at: this.created_at,
+            updated_at: this.updated_at,
             ...this.props
         } as Required<{ id: string, created_at: string, updated_at: string } & PropsConstructor>
     }
