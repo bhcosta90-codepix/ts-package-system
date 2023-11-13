@@ -10,39 +10,43 @@ export enum PixKeyKind {
 
 export type PixKeyProps = {
     kind: PixKeyKind;
-    value?: string | null;
+    key?: string | null;
 };
+
+export function getKind(value: number): PixKeyKind {
+    const mappingPixKeyKind: Record<number, PixKeyKind> = {
+        1: PixKeyKind.ID,
+        2: PixKeyKind.PHONE,
+        3: PixKeyKind.EMAIL,
+        4: PixKeyKind.DOCUMENT,
+    };
+
+    return mappingPixKeyKind[value];
+}
 
 export class PixKeyEntity extends EntityAbstract {
     protected _kind: number;
-    protected _value: string;
+    protected _key: string;
 
     constructor(props: PixKeyProps & EntityProps) {
         super(props);
 
-        const mappingPixKeyKind: Record<number, PixKeyKind> = {
-            1: PixKeyKind.ID,
-            2: PixKeyKind.PHONE,
-            3: PixKeyKind.EMAIL,
-            4: PixKeyKind.DOCUMENT,
-        };
+        this._kind = getKind(props.kind);
 
-        this._kind = mappingPixKeyKind[props.kind];
-
-        let value = props.value;
+        let value = props.key;
 
         if (this._kind === PixKeyKind.ID) {
             value = randomUUID();
         }
 
-        switch(this._kind) {
+        switch (this._kind) {
             case PixKeyKind.PHONE:
             case PixKeyKind.DOCUMENT:
-                value = value.replace(/[^0-9]/g,'');
+                value = value.replace(/[^0-9]/g, '');
                 break;
         }
 
-        this._value = value;
+        this._key = value;
     }
 
 
@@ -50,7 +54,7 @@ export class PixKeyEntity extends EntityAbstract {
         return this._kind;
     }
 
-    get value(): string {
-        return this._value;
+    get key(): string {
+        return this._key;
     }
 }

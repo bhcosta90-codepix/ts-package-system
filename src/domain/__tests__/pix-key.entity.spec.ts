@@ -7,11 +7,11 @@ describe("PixKeyEntity Unit Test", () => {
 
         const entity = new PixKeyEntity({
             kind: 1,
-            value
+            key: value
         });
 
-        expect(entity.value).not.toBeNull();
-        expect(entity.value).not.toBe(value);
+        expect(entity.key).not.toBeNull();
+        expect(entity.key).not.toBe(value);
         expect(entity.kind).toBe(PixKeyKind.ID);
         expect(entity).toBeInstanceOf(EntityAbstract)
     });
@@ -21,10 +21,10 @@ describe("PixKeyEntity Unit Test", () => {
 
         const entity = new PixKeyEntity({
             kind: 2,
-            value
+            key: value
         });
 
-        expect(entity.value).toBe('19988707070');
+        expect(entity.key).toBe('19988707070');
         expect(entity.kind).toBe(PixKeyKind.PHONE);
         expect(entity).toBeInstanceOf(EntityAbstract)
     })
@@ -34,10 +34,10 @@ describe("PixKeyEntity Unit Test", () => {
 
         const entity = new PixKeyEntity({
             kind: 4,
-            value
+            key: value
         });
 
-        expect(entity.value).toBe("52301745000194");
+        expect(entity.key).toBe("52301745000194");
         expect(entity.kind).toBe(PixKeyKind.DOCUMENT);
         expect(entity).toBeInstanceOf(EntityAbstract)
     })
@@ -47,10 +47,10 @@ describe("PixKeyEntity Unit Test", () => {
 
         const entity = new PixKeyEntity({
             kind: 3,
-            value
+            key: value
         });
 
-        expect(entity.value).toBe("test@test.com");
+        expect(entity.key).toBe("test@test.com");
         expect(entity.kind).toBe(PixKeyKind.EMAIL);
         expect(entity).toBeInstanceOf(EntityAbstract)
     })
