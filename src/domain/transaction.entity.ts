@@ -1,10 +1,14 @@
 import {EntityAbstract, EntityProps} from "../@shared/domain/entity.abstract";
 import {PixKeyValueObject} from "./vo/pix-key.vo";
+import {TransactionException} from "./exceptions/transaction.exception";
+import {TransactionProcessedEvent} from "./events/transaction-processed.event";
+import {TransactionConfirmedEvent} from "./events/transaction-confirmed.event";
+import {TransactionCompletedEvent} from "./events/transaction-completed.event";
 
 export namespace Transaction {
 
     export enum Status {
-        CREATING = 0,
+        OPEN = 0,
         CONFIRMED = 1,
         PROCESSED = 2,
         COMPLETED = 2,
@@ -16,7 +20,7 @@ export namespace Transaction {
         description: string;
         value: number;
         pixKey: PixKeyValueObject.ValueObject;
-        status: Status | null;
+        status?: Status | null;
     };
 
     export class Entity extends EntityAbstract {
@@ -25,7 +29,7 @@ export namespace Transaction {
         protected _description: string;
         protected _value: number;
         protected _pixKey: PixKeyValueObject.ValueObject;
-        protected _status: Transaction.Status
+        private _status: Transaction.Status
 
         constructor(props: Transaction.Props & EntityProps) {
             super(props);
@@ -34,7 +38,38 @@ export namespace Transaction {
             this._description = props.description;
             this._value = props.value;
             this._pixKey = props.pixKey;
-            this._status = props.status ?? Transaction.Status.CREATING;
+            this._status = props.status ?? Transaction.Status.OPEN;
+        }
+
+        changeProcessed() {
+            if (this._status != Transaction.Status.OPEN) {
+                throw new TransactionException("Only open transactions can change to this status");
+            }
+
+            this._status = Transaction.Status.PROCESSED;
+            this.event.add(new TransactionProcessedEvent(this));
+        }
+
+        changeConfirmed() {
+            if (this._status != Transaction.Status.PROCESSED) {
+                throw new TransactionException("Only processed charges can change to this status");
+            }
+
+            this._status = Transaction.Status.CONFIRMED;
+            this.event.add(new TransactionConfirmedEvent(this));
+        }
+
+        changeCompleted() {
+            if (this._status != Transaction.Status.CONFIRMED) {
+                throw new TransactionException("Only confirmed charges can be completed");
+            }
+
+            this._status = Transaction.Status.COMPLETED;
+            this.event.add(new TransactionCompletedEvent(this));
+        }
+
+        get status(): Transaction.Status {
+            return this._status;
         }
     }
 
@@ -45,6 +80,7 @@ export namespace Transaction {
         private _description: string = 'testing';
         private _bank: string = '5ebe14a0-8252-11ee-b962-0242ac120002';
         private _reference: string = '65860928-8252-11ee-b962-0242ac120002';
+        private _status: Transaction.Status = Transaction.Status.OPEN;
 
 
         withKind(value: number): this {
@@ -77,6 +113,11 @@ export namespace Transaction {
             return this;
         }
 
+        withStatus(value: Transaction.Status): this {
+            this._status = value;
+            return this;
+        }
+
         make(): Transaction.Entity {
             return new Transaction.Entity({
                 pixKey: new PixKeyValueObject.ValueObject({
@@ -87,6 +128,7 @@ export namespace Transaction {
                 value: this._value,
                 reference: this._reference,
                 description: this._description,
+                status: this._status
             });
         }
     }

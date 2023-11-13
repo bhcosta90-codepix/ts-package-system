@@ -1,10 +1,13 @@
 import {EntityInterface} from "./entity.interface";
 import {randomUUID} from 'crypto'
+import {Event} from "./events/event";
+import {EventInterface} from "./events/event.interface";
 
 export abstract class EntityAbstract<PropsConstructor = any> implements EntityInterface<PropsConstructor> {
     protected _id: string;
     protected _created_at: Date;
     protected _updated_at: Date;
+    private _event = new Event();
 
     protected constructor(protected readonly props: PropsConstructor & EntityProps) {
         this._id = this.props.id ?? randomUUID();
@@ -39,6 +42,13 @@ export abstract class EntityAbstract<PropsConstructor = any> implements EntityIn
         } as Required<{ id: string, created_at: string, updated_at: string } & PropsConstructor>
     }
 
+    protected get event(): Event {
+        return this._event;
+    }
+
+    public get events(): EventInterface[] {
+        return this.event.events();
+    }
 }
 
 export type EntityProps = {
