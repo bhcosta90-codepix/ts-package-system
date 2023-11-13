@@ -30,7 +30,7 @@ describe("Transaction.Entity Unit Test", () => {
 
     describe("Factory entity", () => {
         test("creating a simple factory entity", () => {
-            const entity = new Transaction.Builder().make();
+            const entity = new Transaction.Factory().make();
             expect(entity.toJSON()).toMatchObject({
                 pixKey: {
                     kind: 3,
@@ -44,7 +44,7 @@ describe("Transaction.Entity Unit Test", () => {
         });
 
         test("creating a factory entity with data", () => {
-            const entity = new Transaction.Builder()
+            const entity = new Transaction.Factory()
                 .withKind(2)
                 .withKey('(19) 98870-4040')
                 .withBank('dc94d88e-8255-11ee-b962-0242ac120002')

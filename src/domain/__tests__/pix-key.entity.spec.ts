@@ -21,7 +21,7 @@ describe("PixKey.Entity Unit Test", () => {
 
     describe("Factory entity", () => {
         test("creating a simple factory entity", () => {
-            const entity = new PixKey.Builder().make();
+            const entity = new PixKey.Factory().make();
             expect(entity.toJSON()).toMatchObject({
                 pixKey: {
                     kind: 3,
@@ -31,7 +31,7 @@ describe("PixKey.Entity Unit Test", () => {
         });
 
         test("creating a factory entity with data", () => {
-            const entity = new PixKey.Builder()
+            const entity = new PixKey.Factory()
                 .withKind(2)
                 .withKey('(19) 98870-4040')
                 .make();

@@ -23,7 +23,7 @@ export namespace PixKey {
         }
     }
 
-    export class Builder {
+    export class Factory {
         private _kind: number = 3;
         private _key: string = 'test@test.com';
 
