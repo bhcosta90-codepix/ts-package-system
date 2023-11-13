@@ -1,10 +1,9 @@
-import {PixKeyEntity, PixKeyKind} from "../pix-key.entity";
 import {EntityAbstract} from "../../@shared/domain/entity.abstract";
-import {TransactionEntity} from "../transaction.entity";
+import {Transaction} from "../transaction.entity";
 
-describe("TransactionEntity Unit Test", () => {
+describe("Transaction.Entity Unit Test", () => {
     test("Creating a new transaction", () => {
-        const entity = new TransactionEntity({
+        const entity = new Transaction.Entity({
             kind: 3,
             key: 'test@test.com',
             value: 50,

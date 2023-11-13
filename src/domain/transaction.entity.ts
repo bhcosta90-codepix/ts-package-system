@@ -1,29 +1,33 @@
-import {EntityAbstract} from "../@shared/domain/entity.abstract";
-import {getKind, PixKeyKind} from "./pix-key.entity";
+import {EntityAbstract, EntityProps} from "../@shared/domain/entity.abstract";
+import {PixKey} from "./pix-key.entity";
 
-export type TransactionProps = {
-    bank: string;
-    reference: string;
-    description: string;
-    value: number;
-    kind: number;
-    key: string;
-};
-export class TransactionEntity extends EntityAbstract {
-    protected _bank: string;
-    protected _reference: string;
-    protected _description: string;
-    protected _value: number;
-    protected _kind: PixKeyKind;
-    protected _key: string;
+export namespace Transaction {
 
-    constructor(props: TransactionProps) {
-        super(props);
-        this._bank = props.bank;
-        this._reference = props.reference;
-        this._description = props.description;
-        this._value = props.value;
-        this._kind = getKind(props.kind);
-        this._key = props.key;
+    export type Props = {
+        bank: string;
+        reference: string;
+        description: string;
+        value: number;
+        kind: number;
+        key: string;
+    };
+
+    export class Entity extends EntityAbstract {
+        protected _bank: string;
+        protected _reference: string;
+        protected _description: string;
+        protected _value: number;
+        protected _kind: PixKey.Kind;
+        protected _key: string;
+
+        constructor(props: Transaction.Props & EntityProps) {
+            super(props);
+            this._bank = props.bank;
+            this._reference = props.reference;
+            this._description = props.description;
+            this._value = props.value;
+            this._kind = PixKey.getKind(props.kind);
+            this._key = props.key;
+        }
     }
 }

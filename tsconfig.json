@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "./dist",
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
@@ -19,5 +19,6 @@
     "rootDir": "./src/",
     "sourceMap": true,
     "declarationMap": true
-  }
+  },
+  "include": ["./src/"]
 }
