@@ -30,7 +30,7 @@ export namespace Transaction {
         }
     }
 
-    export class Factory {
+    export class Builder {
         private _kind: number = 3;
         private _key: string = 'test@test.com';
         private _value: number = 50;
