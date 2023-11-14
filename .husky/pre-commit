@@ -1,6 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run tsc
-git add ./dist
 npm run test:cov -- --silent --maxWorkers=10

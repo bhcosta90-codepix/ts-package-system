@@ -9,7 +9,7 @@ export namespace PixKeyValueObject {
     }
 
     export type Props = {
-        kind: Kind;
+        kind: string;
         key?: string | null;
     };
 
@@ -18,11 +18,11 @@ export namespace PixKeyValueObject {
         protected _key?: string | null;
 
         constructor(props: Props) {
-            const mappingPixKeyKind: Record<number, Kind> = {
-                1: Kind.ID,
-                2: Kind.PHONE,
-                3: Kind.EMAIL,
-                4: Kind.DOCUMENT,
+            const mappingPixKeyKind: Record<string, Kind> = {
+                "id": Kind.ID,
+                "phone": Kind.PHONE,
+                "email": Kind.EMAIL,
+                "document": Kind.DOCUMENT,
             };
 
             this._kind = mappingPixKeyKind[props.kind];

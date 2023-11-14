@@ -11,7 +11,7 @@ describe("Transaction.Entity Unit Test", () => {
     test("Creating a new transaction", () => {
         const entity = new transaction_entity_1.Transaction.Entity({
             pixKey: new pix_key_vo_1.PixKeyValueObject.ValueObject({
-                kind: 3,
+                kind: "email",
                 key: 'test@test.com',
             }),
             value: 50,
@@ -22,7 +22,7 @@ describe("Transaction.Entity Unit Test", () => {
         expect(entity).toBeInstanceOf(entity_abstract_1.EntityAbstract);
         expect(entity.toJSON()).toMatchObject({
             pixKey: new pix_key_vo_1.PixKeyValueObject.ValueObject({
-                kind: 3,
+                kind: "email",
                 key: 'test@test.com',
             }),
             value: 50,
@@ -47,7 +47,7 @@ describe("Transaction.Entity Unit Test", () => {
         });
         test("creating a factory entity with data", () => {
             const entity = new transaction_entity_1.Transaction.Factory()
-                .withKind(2)
+                .withKind("phone")
                 .withKey('(19) 98870-4040')
                 .withBank('dc94d88e-8255-11ee-b962-0242ac120002')
                 .withReference('e0a722a6-8255-11ee-b962-0242ac120002')

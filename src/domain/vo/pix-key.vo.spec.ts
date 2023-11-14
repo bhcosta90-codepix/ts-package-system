@@ -5,7 +5,7 @@ describe("PixKeyValueObject Unit Test", () => {
         const value = 'd1904866-ae81-4ec2-9300-63a06b886d34';
 
         const entity = new PixKeyValueObject.ValueObject({
-            kind: 1,
+            kind: "id",
             key: value
         });
 
@@ -18,7 +18,7 @@ describe("PixKeyValueObject Unit Test", () => {
         const value = '(19) 98870-7070';
 
         const entity = new PixKeyValueObject.ValueObject({
-            kind: 2,
+            kind: "phone",
             key: value
         });
 
@@ -30,7 +30,7 @@ describe("PixKeyValueObject Unit Test", () => {
         const value = '52.301.745/0001-94';
 
         const entity = new PixKeyValueObject.ValueObject({
-            kind: 4,
+            kind: "document",
             key: value
         });
 
@@ -42,7 +42,7 @@ describe("PixKeyValueObject Unit Test", () => {
         const value = 'test@test.com';
 
         const entity = new PixKeyValueObject.ValueObject({
-            kind: 3,
+            kind: "email",
             key: value
         });
 

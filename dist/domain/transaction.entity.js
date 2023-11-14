@@ -55,7 +55,7 @@ var Transaction;
     Transaction.Entity = Entity;
     class Factory {
         constructor() {
-            this._kind = 3;
+            this._kind = "email";
             this._key = 'test@test.com';
             this._value = 50;
             this._description = 'testing';

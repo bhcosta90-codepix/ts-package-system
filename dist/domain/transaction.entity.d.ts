@@ -36,7 +36,7 @@ export declare namespace Transaction {
         private _bank;
         private _reference;
         private _status;
-        withKind(value: number): this;
+        withKind(value: string): this;
         withKey(value: string): this;
         withValue(value: number): this;
         withDescription(value: string): this;

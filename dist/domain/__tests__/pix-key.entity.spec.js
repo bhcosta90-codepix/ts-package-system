@@ -8,7 +8,7 @@ describe("PixKey.Entity Unit Test", () => {
         const value = 'd1904866-ae81-4ec2-9300-63a06b886d34';
         const entity = new pix_key_entity_1.PixKey.Entity({
             pixKey: new pix_key_vo_1.PixKeyValueObject.ValueObject({
-                kind: 1,
+                kind: "id",
                 key: value
             }),
             bank: '8ee0a7c0-8305-11ee-b962-0242ac120002'
@@ -31,7 +31,7 @@ describe("PixKey.Entity Unit Test", () => {
         });
         test("creating a factory entity with data", () => {
             const entity = new pix_key_entity_1.PixKey.Factory()
-                .withKind(2)
+                .withKind("phone")
                 .withKey('(19) 98870-4040')
                 .make();
             expect(entity.toJSON()).toMatchObject({

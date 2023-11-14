@@ -74,7 +74,7 @@ export namespace Transaction {
     }
 
     export class Factory {
-        private _kind: number = 3;
+        private _kind: string = "email";
         private _key: string = 'test@test.com';
         private _value: number = 50;
         private _description: string = 'testing';
@@ -83,7 +83,7 @@ export namespace Transaction {
         private _status: Transaction.Status = Transaction.Status.OPEN;
 
 
-        withKind(value: number): this {
+        withKind(value: string): this {
             this._kind = value;
             return this;
         }
