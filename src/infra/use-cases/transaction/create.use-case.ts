@@ -17,6 +17,8 @@ export namespace UseCase {
 
     export type Output = {
         id: string;
+        status: Transaction.Status,
+        created_at: Date
     };
 
     export class UseCaseException extends Error {
@@ -47,9 +49,13 @@ export namespace UseCase {
             });
 
             await this.repository.insertNewTransaction(entity);
+            entity.changeProcessed();
+            await this.repository.updateStatus(entity.id, entity.status);
 
             return {
                 id: entity.id,
+                status: entity.status,
+                created_at: entity.created_at
             };
         }
     }

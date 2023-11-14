@@ -2,6 +2,7 @@ import {UseCase} from '../create.use-case'
 import {PixKeyRepository} from "../../../../domain/repositories/pix-key.repository";
 import {TransactionRepository} from "../../../../domain/repositories/transaction.repository";
 import {NotFoundError} from "../../../../@shared/exception/not-found.error";
+import {Transaction} from "../../../../domain/transaction.entity";
 
 describe("CreateUseCase Unit Test", () => {
     test("should a new transaction", async () => {
@@ -10,7 +11,8 @@ describe("CreateUseCase Unit Test", () => {
         };
 
         const mockTransactionRepository : Partial<TransactionRepository> = {
-            insertNewTransaction: jest.fn().mockImplementation(() => Promise.resolve())
+            insertNewTransaction: jest.fn().mockImplementation(() => Promise.resolve()),
+            updateStatus: jest.fn().mockImplementation(() => Promise.resolve()),
         }
 
         const response = await new UseCase.CreateUseCase(
@@ -26,6 +28,8 @@ describe("CreateUseCase Unit Test", () => {
         });
 
         expect(response.id).not.toBeNull();
+        expect(response.status).toBe(Transaction.Status.PROCESSED);
+        expect(response.created_at).not.toBeNull();
     });
 
     test("exception when a pix exist", async () => {
