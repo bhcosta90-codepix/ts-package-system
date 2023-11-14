@@ -11,12 +11,12 @@ describe("UseCase.Create Unit Test", () => {
 
         const response = await new UseCase.Create(mockPixKeyRepository as PixKeyRepository).handle({
             bank: '8ee0a7c0-8305-11ee-b962-0242ac120002',
-            kind: 3,
+            kind: "email",
             key: 'test@test.com'
         });
 
         expect(response).toMatchObject({
-            kind: 3,
+            kind: "email",
             key: 'test@test.com'
         });
 
@@ -35,7 +35,7 @@ describe("UseCase.Create Unit Test", () => {
 
         await expect(() => new UseCase.Create(mockPixKeyRepository as PixKeyRepository).handle({
             bank: '8ee0a7c0-8305-11ee-b962-0242ac120003',
-            kind: 3,
+            kind: "email",
             key: 'test@test.com'
         })).rejects.toThrow(new UseCase.UseCaseException('This pix was registered in our system'));
     })

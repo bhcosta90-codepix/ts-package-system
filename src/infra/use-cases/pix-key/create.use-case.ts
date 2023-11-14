@@ -6,14 +6,14 @@ export namespace UseCase {
 
     export type Input = {
         bank: string;
-        kind: number;
+        kind: string;
         key?: string | null;
     };
 
     export type Output = {
         id: string;
         bank: string;
-        kind: number;
+        kind: string;
         key: string;
         created_at: Date;
     };
@@ -47,8 +47,8 @@ export namespace UseCase {
             return {
                 bank: entity.bank,
                 id: entity.id,
+                kind: input.kind,
                 key: entity.key,
-                kind: entity.kind,
                 created_at: entity.created_at
             };
         }

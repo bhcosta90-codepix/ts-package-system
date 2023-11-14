@@ -6,7 +6,7 @@ export declare namespace PixKeyValueObject {
         DOCUMENT = 4
     }
     type Props = {
-        kind: Kind;
+        kind: string;
         key?: string | null;
     };
     class ValueObject {

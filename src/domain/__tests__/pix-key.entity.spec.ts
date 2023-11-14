@@ -8,7 +8,7 @@ describe("PixKey.Entity Unit Test", () => {
 
         const entity = new PixKey.Entity({
             pixKey: new PixKeyValueObject.ValueObject({
-                kind: 1,
+                kind: "id",
                 key: value
             }),
             bank: '8ee0a7c0-8305-11ee-b962-0242ac120002'
@@ -34,7 +34,7 @@ describe("PixKey.Entity Unit Test", () => {
 
         test("creating a factory entity with data", () => {
             const entity = new PixKey.Factory()
-                .withKind(2)
+                .withKind("phone")
                 .withKey('(19) 98870-4040')
                 .make();
 

@@ -9,7 +9,7 @@ export namespace PixKey {
 
     export class Entity extends EntityAbstract {
         protected _pixKey: PixKeyValueObject.ValueObject;
-        private _bank: string;
+        protected _bank: string;
 
         constructor(props: Props & EntityProps) {
             super(props);
@@ -31,10 +31,10 @@ export namespace PixKey {
     }
 
     export class Factory {
-        private _kind: number = 3;
+        private _kind: string = "email";
         private _key: string = 'test@test.com';
 
-        withKind(value: number): this {
+        withKind(value: string): this {
             this._kind = value;
             return this;
         }

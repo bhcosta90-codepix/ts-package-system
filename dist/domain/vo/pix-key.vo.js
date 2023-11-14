@@ -14,10 +14,10 @@ var PixKeyValueObject;
     class ValueObject {
         constructor(props) {
             const mappingPixKeyKind = {
-                1: Kind.ID,
-                2: Kind.PHONE,
-                3: Kind.EMAIL,
-                4: Kind.DOCUMENT,
+                "id": Kind.ID,
+                "phone": Kind.PHONE,
+                "email": Kind.EMAIL,
+                "document": Kind.DOCUMENT,
             };
             this._kind = mappingPixKeyKind[props.kind];
             let value = props.key;

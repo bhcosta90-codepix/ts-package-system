@@ -7,7 +7,7 @@ export declare namespace PixKey {
     };
     class Entity extends EntityAbstract {
         protected _pixKey: PixKeyValueObject.ValueObject;
-        private _bank;
+        protected _bank: string;
         constructor(props: Props & EntityProps);
         get kind(): number;
         get key(): string;
@@ -16,7 +16,7 @@ export declare namespace PixKey {
     class Factory {
         private _kind;
         private _key;
-        withKind(value: number): this;
+        withKind(value: string): this;
         withKey(value: string): this;
         make(): PixKey.Entity;
     }

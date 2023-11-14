@@ -28,8 +28,8 @@ var UseCase;
             return {
                 bank: entity.bank,
                 id: entity.id,
+                kind: input.kind,
                 key: entity.key,
-                kind: entity.kind,
                 created_at: entity.created_at
             };
         }

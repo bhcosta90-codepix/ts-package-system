@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "tsc": "tsc",
     "test": "jest",
     "test:cov": "npm run test -- --coverage",

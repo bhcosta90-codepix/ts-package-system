@@ -2,13 +2,13 @@ import { PixKeyRepository } from "../../../domain/repositories/pix-key.repositor
 export declare namespace UseCase {
     type Input = {
         bank: string;
-        kind: number;
+        kind: string;
         key?: string | null;
     };
     type Output = {
         id: string;
         bank: string;
-        kind: number;
+        kind: string;
         key: string;
         created_at: Date;
     };
