@@ -14,7 +14,7 @@ export declare namespace UseCase {
     };
     class UseCaseException extends Error {
     }
-    class Create {
+    class CreateUseCase {
         protected repository: PixKeyRepository;
         constructor(repository: PixKeyRepository);
         handle(input: Input): Promise<Output>;

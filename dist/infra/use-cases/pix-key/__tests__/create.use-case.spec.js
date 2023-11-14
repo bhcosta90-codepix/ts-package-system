@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const create_use_case_1 = require("../create.use-case");
-describe("UseCase.Create Unit Test", () => {
+describe("CreateUseCase Unit Test", () => {
     test("should a new pix key", async () => {
         const mockPixKeyRepository = {
             insertNewPix: jest.fn().mockImplementation(),
             verifyPixKey: jest.fn().mockImplementation(() => Promise.resolve(false))
         };
-        const response = await new create_use_case_1.UseCase.Create(mockPixKeyRepository).handle({
+        const response = await new create_use_case_1.UseCase.CreateUseCase(mockPixKeyRepository).handle({
             bank: '8ee0a7c0-8305-11ee-b962-0242ac120002',
             kind: "email",
             key: 'test@test.com'
@@ -26,7 +26,7 @@ describe("UseCase.Create Unit Test", () => {
         const mockPixKeyRepository = {
             verifyPixKey: jest.fn().mockImplementation(() => Promise.resolve(true))
         };
-        await expect(() => new create_use_case_1.UseCase.Create(mockPixKeyRepository).handle({
+        await expect(() => new create_use_case_1.UseCase.CreateUseCase(mockPixKeyRepository).handle({
             bank: '8ee0a7c0-8305-11ee-b962-0242ac120003',
             kind: "email",
             key: 'test@test.com'
