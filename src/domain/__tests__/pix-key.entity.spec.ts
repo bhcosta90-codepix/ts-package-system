@@ -10,13 +10,15 @@ describe("PixKey.Entity Unit Test", () => {
             pixKey: new PixKeyValueObject.ValueObject({
                 kind: 1,
                 key: value
-            })
+            }),
+            bank: '8ee0a7c0-8305-11ee-b962-0242ac120002'
         });
 
         expect(entity.key).not.toBeNull();
         expect(entity.key).not.toBe(value);
         expect(entity.kind).toBe(PixKeyValueObject.Kind.ID);
         expect(entity).toBeInstanceOf(EntityAbstract)
+        expect(entity.bank).toBe('8ee0a7c0-8305-11ee-b962-0242ac120002');
     });
 
     describe("Factory entity", () => {

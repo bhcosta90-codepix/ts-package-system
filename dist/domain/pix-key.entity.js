@@ -9,12 +9,16 @@ var PixKey;
         constructor(props) {
             super(props);
             this._pixKey = props.pixKey;
+            this._bank = props.bank;
         }
         get kind() {
             return this._pixKey.kind;
         }
         get key() {
             return this._pixKey.key;
+        }
+        get bank() {
+            return this._bank;
         }
     }
     PixKey.Entity = Entity;
@@ -37,6 +41,7 @@ var PixKey;
                     kind: this._kind,
                     key: this._key
                 }),
+                bank: 'f7e2692c-8303-11ee-b962-0242ac120002'
             });
         }
     }
