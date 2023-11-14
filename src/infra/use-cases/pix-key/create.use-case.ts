@@ -5,12 +5,14 @@ import {PixKeyRepository} from "../../../domain/repositories/pix-key.repository"
 export namespace UseCase {
 
     export type Input = {
+        bank: string;
         kind: number;
         key?: string | null;
     };
 
     export type Output = {
         id: string;
+        bank: string;
         kind: number;
         key: string;
         created_at: Date;
@@ -36,12 +38,14 @@ export namespace UseCase {
             }
 
             const entity = new PixKey.Entity({
+                bank: input.bank,
                 pixKey
             });
 
             this.repository.insertNewPix(entity);
 
             return {
+                bank: entity.bank,
                 id: entity.id,
                 key: entity.key,
                 kind: entity.kind,

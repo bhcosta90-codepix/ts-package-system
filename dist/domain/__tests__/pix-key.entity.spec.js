@@ -10,12 +10,14 @@ describe("PixKey.Entity Unit Test", () => {
             pixKey: new pix_key_vo_1.PixKeyValueObject.ValueObject({
                 kind: 1,
                 key: value
-            })
+            }),
+            bank: '8ee0a7c0-8305-11ee-b962-0242ac120002'
         });
         expect(entity.key).not.toBeNull();
         expect(entity.key).not.toBe(value);
         expect(entity.kind).toBe(pix_key_vo_1.PixKeyValueObject.Kind.ID);
         expect(entity).toBeInstanceOf(entity_abstract_1.EntityAbstract);
+        expect(entity.bank).toBe('8ee0a7c0-8305-11ee-b962-0242ac120002');
     });
     describe("Factory entity", () => {
         test("creating a simple factory entity", () => {

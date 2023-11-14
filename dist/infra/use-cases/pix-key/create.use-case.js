@@ -21,10 +21,12 @@ var UseCase;
                 throw new UseCaseException('This pix was registered in our system');
             }
             const entity = new pix_key_entity_1.PixKey.Entity({
+                bank: input.bank,
                 pixKey
             });
             this.repository.insertNewPix(entity);
             return {
+                bank: entity.bank,
                 id: entity.id,
                 key: entity.key,
                 kind: entity.kind,

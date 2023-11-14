@@ -8,6 +8,7 @@ describe("UseCase.Create Unit Test", () => {
             verifyPixKey: jest.fn().mockImplementation(() => Promise.resolve(false))
         };
         const response = await new create_use_case_1.UseCase.Create(mockPixKeyRepository).handle({
+            bank: '8ee0a7c0-8305-11ee-b962-0242ac120002',
             kind: 3,
             key: 'test@test.com'
         });
@@ -15,6 +16,7 @@ describe("UseCase.Create Unit Test", () => {
             kind: 3,
             key: 'test@test.com'
         });
+        expect(response.bank).toBe('8ee0a7c0-8305-11ee-b962-0242ac120002');
         expect(response.id).not.toBeNull();
         expect(response.created_at).not.toBeNull();
         expect(mockPixKeyRepository.verifyPixKey).toHaveBeenCalledTimes(1);
@@ -25,6 +27,7 @@ describe("UseCase.Create Unit Test", () => {
             verifyPixKey: jest.fn().mockImplementation(() => Promise.resolve(true))
         };
         await expect(() => new create_use_case_1.UseCase.Create(mockPixKeyRepository).handle({
+            bank: '8ee0a7c0-8305-11ee-b962-0242ac120003',
             kind: 3,
             key: 'test@test.com'
         })).rejects.toThrow(new create_use_case_1.UseCase.UseCaseException('This pix was registered in our system'));

@@ -3,15 +3,18 @@ import {PixKeyValueObject} from "./vo/pix-key.vo";
 
 export namespace PixKey {
     export type Props = {
-        pixKey: PixKeyValueObject.ValueObject
+        bank: string,
+        pixKey: PixKeyValueObject.ValueObject,
     };
 
     export class Entity extends EntityAbstract {
         protected _pixKey: PixKeyValueObject.ValueObject;
+        private _bank: string;
 
         constructor(props: Props & EntityProps) {
             super(props);
-            this._pixKey = props.pixKey
+            this._pixKey = props.pixKey;
+            this._bank = props.bank
         }
 
         get kind(): number {
@@ -20,6 +23,10 @@ export namespace PixKey {
 
         get key(): string {
             return this._pixKey.key;
+        }
+
+        get bank(): string {
+            return this._bank;
         }
     }
 
@@ -43,6 +50,7 @@ export namespace PixKey {
                     kind: this._kind,
                     key: this._key
                 }),
+                bank: 'f7e2692c-8303-11ee-b962-0242ac120002'
             });
         }
     }
