@@ -1,7 +1,7 @@
 import {UseCase} from "../create.use-case";
 import {PixKeyRepository} from "../../../../domain/repositories/pix-key.repository";
 
-describe("UseCase.Create Unit Test", () => {
+describe("CreateUseCase Unit Test", () => {
     test("should a new pix key", async () => {
 
         const mockPixKeyRepository: Partial<PixKeyRepository> = {
@@ -9,7 +9,7 @@ describe("UseCase.Create Unit Test", () => {
             verifyPixKey: jest.fn().mockImplementation(() => Promise.resolve(false))
         };
 
-        const response = await new UseCase.Create(mockPixKeyRepository as PixKeyRepository).handle({
+        const response = await new UseCase.CreateUseCase(mockPixKeyRepository as PixKeyRepository).handle({
             bank: '8ee0a7c0-8305-11ee-b962-0242ac120002',
             kind: "email",
             key: 'test@test.com'
@@ -33,7 +33,7 @@ describe("UseCase.Create Unit Test", () => {
             verifyPixKey: jest.fn().mockImplementation(() => Promise.resolve(true))
         };
 
-        await expect(() => new UseCase.Create(mockPixKeyRepository as PixKeyRepository).handle({
+        await expect(() => new UseCase.CreateUseCase(mockPixKeyRepository as PixKeyRepository).handle({
             bank: '8ee0a7c0-8305-11ee-b962-0242ac120003',
             kind: "email",
             key: 'test@test.com'

@@ -22,7 +22,7 @@ export namespace UseCase {
 
     }
 
-    export class Create {
+    export class CreateUseCase {
         constructor(protected repository: PixKeyRepository) {
             //
         }
