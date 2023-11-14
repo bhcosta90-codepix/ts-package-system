@@ -1,0 +1,1 @@
+{"version":3,"file":"transaction-event.base.js","sourceRoot":"","sources":["../../../src/domain/events/transaction-event.base.ts"],"names":[],"mappings":";;;AAGA,MAAsB,oBAAoB;IAEtC,YAAsB,WAA+B;QAA/B,gBAAW,GAAX,WAAW,CAAoB;IAErD,CAAC;IAID,OAAO;QACH,OAAO,IAAI,CAAC,WAAW,CAAC,MAAM,EAAE,CAAC;IACrC,CAAC;CAEJ;AAZD,oDAYC"}
