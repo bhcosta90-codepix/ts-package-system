@@ -3,6 +3,7 @@ import {PixKeyRepository} from "../../../domain/repositories/pix-key.repository"
 import {Transaction} from "../../../domain/transaction.entity";
 import {TransactionRepository} from "../../../domain/repositories/transaction.repository";
 import {NotFoundError} from "../../../@shared/exception/not-found.error";
+import {EventManagerInterface} from "../../event/event-manager.interface";
 
 export namespace UseCase {
 
@@ -26,7 +27,11 @@ export namespace UseCase {
     }
 
     export class CreateUseCase {
-        constructor(protected repositoryPixKey: PixKeyRepository, protected repository: TransactionRepository) {
+        constructor(
+            protected repositoryPixKey: PixKeyRepository,
+            protected repository: TransactionRepository,
+            protected event: EventManagerInterface,
+        ) {
             //
         }
 
@@ -51,6 +56,7 @@ export namespace UseCase {
             await this.repository.insertNewTransaction(entity);
             entity.changeProcessed();
             await this.repository.updateStatus(entity.id, entity.status);
+            this.event.dispatch(entity.events);
 
             return {
                 id: entity.id,
