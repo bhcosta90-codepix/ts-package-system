@@ -10,7 +10,7 @@ describe("TransactionConfirmedEvent Unit Test", () => {
         event = new transaction_confirmed_event_1.TransactionConfirmedEvent(entity);
     });
     test("Testing name event", () => {
-        expect(event.name()).toBe("transaction.confirmed." + entity.id);
+        expect(event.name()).toBe("transaction.confirmed");
     });
     test("Testing payload event", () => {
         expect(event.payload()).toStrictEqual(entity.toJSON());
