@@ -30,7 +30,7 @@ describe("CreateUseCase Unit Test", () => {
             kind: "email",
             key: 'test@test.com',
             value: 50,
-            reference: 'd190d042-8326-11ee-b962-0242ac120002',
+            id: 'd190d042-8326-11ee-b962-0242ac120002',
             description: 'testing'
         });
 
@@ -61,7 +61,7 @@ describe("CreateUseCase Unit Test", () => {
             kind: "email",
             key: 'test@test.com',
             value: 50,
-            reference: 'd190d042-8326-11ee-b962-0242ac120002',
+            id: 'd190d042-8326-11ee-b962-0242ac120002',
             description: 'testing'
         })).rejects.toThrow(new NotFoundError('Pix not found'))
     });

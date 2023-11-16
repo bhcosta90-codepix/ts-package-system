@@ -8,8 +8,8 @@ import {EventManagerInterface} from "../../event/event-manager.interface";
 export namespace UseCase {
 
     export type Input = {
+        id: string;
         bank: string;
-        reference: string;
         description: string;
         value: number;
         kind: string;
@@ -49,7 +49,7 @@ export namespace UseCase {
                 bank: input.bank,
                 pixKey,
                 value: input.value,
-                reference: input.reference,
+                reference: input.id,
                 description: input.description,
             });
 
