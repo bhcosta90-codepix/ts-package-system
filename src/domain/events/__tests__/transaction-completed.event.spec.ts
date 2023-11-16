@@ -11,7 +11,7 @@ describe("TransactionCompletedEvent Unit Test", () => {
     })
 
     test("Testing name event", () => {
-        expect(event.name()).toBe("transaction.completed." + entity.id);
+        expect(event.name()).toBe("transaction.completed");
     })
 
     test("Testing payload event", () => {

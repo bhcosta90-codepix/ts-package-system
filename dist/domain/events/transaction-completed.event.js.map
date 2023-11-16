@@ -1,1 +1,1 @@
-{"version":3,"file":"transaction-completed.event.js","sourceRoot":"","sources":["../../../src/domain/events/transaction-completed.event.ts"],"names":[],"mappings":";;;AAAA,qEAA8D;AAE9D,MAAa,yBAA0B,SAAQ,6CAAoB;IAC/D,IAAI;QACA,OAAO,wBAAwB,GAAG,IAAI,CAAC,WAAW,CAAC,EAAE,CAAC;IAC1D,CAAC;CACJ;AAJD,8DAIC"}
+{"version":3,"file":"transaction-completed.event.js","sourceRoot":"","sources":["../../../src/domain/events/transaction-completed.event.ts"],"names":[],"mappings":";;;AAAA,qEAA8D;AAE9D,MAAa,yBAA0B,SAAQ,6CAAoB;IAC/D,IAAI;QACA,OAAO,uBAAuB,CAAC;IACnC,CAAC;CACJ;AAJD,8DAIC"}

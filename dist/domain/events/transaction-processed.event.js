@@ -4,7 +4,7 @@ exports.TransactionProcessedEvent = void 0;
 const transaction_event_base_1 = require("./transaction-event.base");
 class TransactionProcessedEvent extends transaction_event_base_1.TransactionEventBase {
     name() {
-        return "transaction.processed." + this.transaction.id;
+        return "transaction.processed";
     }
 }
 exports.TransactionProcessedEvent = TransactionProcessedEvent;

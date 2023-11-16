@@ -10,7 +10,7 @@ describe("TransactionCompletedEvent Unit Test", () => {
         event = new transaction_completed_event_1.TransactionCompletedEvent(entity);
     });
     test("Testing name event", () => {
-        expect(event.name()).toBe("transaction.completed." + entity.id);
+        expect(event.name()).toBe("transaction.completed");
     });
     test("Testing payload event", () => {
         expect(event.payload()).toStrictEqual(entity.toJSON());
