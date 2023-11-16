@@ -20,7 +20,8 @@ var UseCase;
                 kind: input.kind,
                 key: input.key
             });
-            if (!await this.repositoryPixKey.verifyPixKey(pixKey)) {
+            const bankToPix = await this.repositoryPixKey.getBankToPix(pixKey);
+            if (!bankToPix) {
                 throw new not_found_error_1.NotFoundError('Pix not found');
             }
             const entity = new transaction_entity_1.Transaction.Entity({
@@ -31,7 +32,7 @@ var UseCase;
                 description: input.description,
             });
             await this.repository.insertNewTransaction(entity);
-            entity.changeProcessed();
+            entity.changeProcessed(bankToPix);
             await this.repository.updateStatus(entity.id, entity.status);
             this.event.dispatch(entity.events);
             return {

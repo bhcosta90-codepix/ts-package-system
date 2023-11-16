@@ -41,13 +41,13 @@ export namespace Transaction {
             this._status = props.status ?? Transaction.Status.OPEN;
         }
 
-        changeProcessed() {
+        changeProcessed(destinBank: string) {
             if (this._status != Transaction.Status.OPEN) {
                 throw new TransactionException("Only open transactions can change to this status");
             }
 
             this._status = Transaction.Status.PROCESSED;
-            this.event.add(new TransactionProcessedEvent(this));
+            this.event.add(new TransactionProcessedEvent(this, destinBank));
         }
 
         changeConfirmed() {

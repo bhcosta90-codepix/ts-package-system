@@ -9,7 +9,7 @@ import {EventInterface} from "../../../../@shared/domain/events/event.interface"
 describe("CreateUseCase Unit Test", () => {
     test("should a new transaction", async () => {
         const mockPixKeyRepository: Partial<PixKeyRepository> = {
-            verifyPixKey: jest.fn().mockImplementation(() => Promise.resolve(true))
+            getBankToPix: jest.fn().mockImplementation(() => Promise.resolve("testing"))
         };
 
         const mockTransactionRepository : Partial<TransactionRepository> = {
@@ -37,7 +37,7 @@ describe("CreateUseCase Unit Test", () => {
         expect(response.id).not.toBeNull();
         expect(response.status).toBe(Transaction.Status.PROCESSED);
         expect(response.created_at).not.toBeNull();
-        expect(mockPixKeyRepository.verifyPixKey).toBeCalledTimes(1);
+        expect(mockPixKeyRepository.getBankToPix).toBeCalledTimes(1);
         expect(mockTransactionRepository.insertNewTransaction).toBeCalledTimes(1);
         expect(mockTransactionRepository.updateStatus).toBeCalledTimes(1);
         expect(mockEvent.dispatch).toBeCalledTimes(1);
@@ -45,7 +45,7 @@ describe("CreateUseCase Unit Test", () => {
 
     test("exception when a pix exist", async () => {
         const mockPixKeyRepository: Partial<PixKeyRepository> = {
-            verifyPixKey: jest.fn().mockImplementation(() => Promise.resolve(false))
+            getBankToPix: jest.fn().mockImplementation(() => Promise.resolve(null))
         };
 
         const mockTransactionRepository : Partial<TransactionRepository> = {}

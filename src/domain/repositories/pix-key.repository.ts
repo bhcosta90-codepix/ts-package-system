@@ -5,4 +5,6 @@ export interface PixKeyRepository {
     insertNewPix(pixKey: PixKey.Entity): Promise<void>;
 
     verifyPixKey(pixKey: PixKeyValueObject.ValueObject): Promise<boolean>;
+
+    getBankToPix(pixKey: PixKeyValueObject.ValueObject): Promise<string | null>;
 }

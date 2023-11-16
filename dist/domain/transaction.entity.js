@@ -27,12 +27,12 @@ var Transaction;
             this._pixKey = props.pixKey;
             this._status = (_a = props.status) !== null && _a !== void 0 ? _a : Transaction.Status.OPEN;
         }
-        changeProcessed() {
+        changeProcessed(destinBank) {
             if (this._status != Transaction.Status.OPEN) {
                 throw new transaction_exception_1.TransactionException("Only open transactions can change to this status");
             }
             this._status = Transaction.Status.PROCESSED;
-            this.event.add(new transaction_processed_event_1.TransactionProcessedEvent(this));
+            this.event.add(new transaction_processed_event_1.TransactionProcessedEvent(this, destinBank));
         }
         changeConfirmed() {
             if (this._status != Transaction.Status.PROCESSED) {

@@ -23,7 +23,7 @@ export declare namespace Transaction {
         protected _pixKey: PixKeyValueObject.ValueObject;
         protected _status: Transaction.Status;
         constructor(props: Transaction.Props & EntityProps);
-        changeProcessed(): void;
+        changeProcessed(destinBank: string): void;
         changeConfirmed(): void;
         changeCompleted(): void;
         get status(): Transaction.Status;
