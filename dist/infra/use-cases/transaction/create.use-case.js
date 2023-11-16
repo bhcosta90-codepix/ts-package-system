@@ -10,9 +10,10 @@ var UseCase;
     }
     UseCase.UseCaseException = UseCaseException;
     class CreateUseCase {
-        constructor(repositoryPixKey, repository) {
+        constructor(repositoryPixKey, repository, event) {
             this.repositoryPixKey = repositoryPixKey;
             this.repository = repository;
+            this.event = event;
         }
         async handle(input) {
             const pixKey = new pix_key_vo_1.PixKeyValueObject.ValueObject({
@@ -26,12 +27,13 @@ var UseCase;
                 bank: input.bank,
                 pixKey,
                 value: input.value,
-                reference: input.reference,
+                reference: input.id,
                 description: input.description,
             });
             await this.repository.insertNewTransaction(entity);
             entity.changeProcessed();
             await this.repository.updateStatus(entity.id, entity.status);
+            this.event.dispatch(entity.events);
             return {
                 id: entity.id,
                 status: entity.status,

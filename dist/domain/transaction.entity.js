@@ -51,6 +51,12 @@ var Transaction;
         get status() {
             return this._status;
         }
+        get kind() {
+            return this._pixKey.kind;
+        }
+        get key() {
+            return this._pixKey.key;
+        }
     }
     Transaction.Entity = Entity;
     class Factory {

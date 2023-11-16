@@ -71,6 +71,14 @@ export namespace Transaction {
         get status(): Transaction.Status {
             return this._status;
         }
+
+        get kind(): number {
+            return this._pixKey.kind;
+        }
+
+        get key(): string {
+            return this._pixKey.key;
+        }
     }
 
     export class Factory {

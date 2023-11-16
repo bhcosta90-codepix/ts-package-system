@@ -12,29 +12,37 @@ describe("CreateUseCase Unit Test", () => {
             insertNewTransaction: jest.fn().mockImplementation(() => Promise.resolve()),
             updateStatus: jest.fn().mockImplementation(() => Promise.resolve()),
         };
-        const response = await new create_use_case_1.UseCase.CreateUseCase(mockPixKeyRepository, mockTransactionRepository).handle({
+        const mockEvent = {
+            dispatch: jest.fn()
+        };
+        const response = await new create_use_case_1.UseCase.CreateUseCase(mockPixKeyRepository, mockTransactionRepository, mockEvent).handle({
             bank: '8ee0a7c0-8305-11ee-b962-0242ac120002',
             kind: "email",
             key: 'test@test.com',
             value: 50,
-            reference: 'd190d042-8326-11ee-b962-0242ac120002',
+            id: 'd190d042-8326-11ee-b962-0242ac120002',
             description: 'testing'
         });
         expect(response.id).not.toBeNull();
         expect(response.status).toBe(transaction_entity_1.Transaction.Status.PROCESSED);
         expect(response.created_at).not.toBeNull();
+        expect(mockPixKeyRepository.verifyPixKey).toBeCalledTimes(1);
+        expect(mockTransactionRepository.insertNewTransaction).toBeCalledTimes(1);
+        expect(mockTransactionRepository.updateStatus).toBeCalledTimes(1);
+        expect(mockEvent.dispatch).toBeCalledTimes(1);
     });
     test("exception when a pix exist", async () => {
         const mockPixKeyRepository = {
             verifyPixKey: jest.fn().mockImplementation(() => Promise.resolve(false))
         };
         const mockTransactionRepository = {};
-        await expect(() => new create_use_case_1.UseCase.CreateUseCase(mockPixKeyRepository, mockTransactionRepository).handle({
+        const mockEvent = {};
+        await expect(() => new create_use_case_1.UseCase.CreateUseCase(mockPixKeyRepository, mockTransactionRepository, mockEvent).handle({
             bank: '8ee0a7c0-8305-11ee-b962-0242ac120002',
             kind: "email",
             key: 'test@test.com',
             value: 50,
-            reference: 'd190d042-8326-11ee-b962-0242ac120002',
+            id: 'd190d042-8326-11ee-b962-0242ac120002',
             description: 'testing'
         })).rejects.toThrow(new not_found_error_1.NotFoundError('Pix not found'));
     });
