@@ -78,7 +78,7 @@ describe("Transaction.Entity Unit Test", () => {
         test("change status to processed", () => {
             const entity = new Transaction.Factory().make();
             expect(entity.status).toBe(Transaction.Status.OPEN);
-            entity.changeProcessed();
+            entity.changeProcessed("testing");
             expect(entity.events.length).toBe(1);
             expect(entity.events[0]).toBeInstanceOf(TransactionProcessedEvent);
             expect(entity.status).toBe(Transaction.Status.PROCESSED);
@@ -87,7 +87,7 @@ describe("Transaction.Entity Unit Test", () => {
                 .withStatus(Transaction.Status.PROCESSED)
                 .make();
 
-            expect(() => entityError.changeProcessed()).toThrow(new TransactionException("Only open transactions can change to this status"));
+            expect(() => entityError.changeProcessed("testing")).toThrow(new TransactionException("Only open transactions can change to this status"));
         })
 
         test("change status to confirmed", () => {

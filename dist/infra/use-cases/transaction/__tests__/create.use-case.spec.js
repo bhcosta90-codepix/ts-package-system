@@ -6,7 +6,7 @@ const transaction_entity_1 = require("../../../../domain/transaction.entity");
 describe("CreateUseCase Unit Test", () => {
     test("should a new transaction", async () => {
         const mockPixKeyRepository = {
-            verifyPixKey: jest.fn().mockImplementation(() => Promise.resolve(true))
+            getBankToPix: jest.fn().mockImplementation(() => Promise.resolve("testing"))
         };
         const mockTransactionRepository = {
             insertNewTransaction: jest.fn().mockImplementation(() => Promise.resolve()),
@@ -26,14 +26,14 @@ describe("CreateUseCase Unit Test", () => {
         expect(response.id).not.toBeNull();
         expect(response.status).toBe(transaction_entity_1.Transaction.Status.PROCESSED);
         expect(response.created_at).not.toBeNull();
-        expect(mockPixKeyRepository.verifyPixKey).toBeCalledTimes(1);
+        expect(mockPixKeyRepository.getBankToPix).toBeCalledTimes(1);
         expect(mockTransactionRepository.insertNewTransaction).toBeCalledTimes(1);
         expect(mockTransactionRepository.updateStatus).toBeCalledTimes(1);
         expect(mockEvent.dispatch).toBeCalledTimes(1);
     });
     test("exception when a pix exist", async () => {
         const mockPixKeyRepository = {
-            verifyPixKey: jest.fn().mockImplementation(() => Promise.resolve(false))
+            getBankToPix: jest.fn().mockImplementation(() => Promise.resolve(null))
         };
         const mockTransactionRepository = {};
         const mockEvent = {};

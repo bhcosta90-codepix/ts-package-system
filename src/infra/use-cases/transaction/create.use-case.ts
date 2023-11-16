@@ -41,7 +41,9 @@ export namespace UseCase {
                 key: input.key
             });
 
-            if (!await this.repositoryPixKey.verifyPixKey(pixKey)) {
+            const bankToPix = await this.repositoryPixKey.getBankToPix(pixKey);
+
+            if (!bankToPix) {
                 throw new NotFoundError('Pix not found');
             }
 
@@ -54,7 +56,7 @@ export namespace UseCase {
             });
 
             await this.repository.insertNewTransaction(entity);
-            entity.changeProcessed();
+            entity.changeProcessed(bankToPix);
             await this.repository.updateStatus(entity.id, entity.status);
             this.event.dispatch(entity.events);
 

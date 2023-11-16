@@ -7,7 +7,7 @@ describe("TransactionProcessedEvent Unit Test", () => {
 
     beforeEach(() => {
         entity = new Transaction.Factory().make();
-        event = new TransactionEvent(entity)
+        event = new TransactionEvent(entity, "bank")
     })
 
     test("Testing name event", () => {
@@ -15,6 +15,9 @@ describe("TransactionProcessedEvent Unit Test", () => {
     })
 
     test("Testing payload event", () => {
-        expect(event.payload()).toStrictEqual(entity.toJSON());
+        expect(event.payload()).toStrictEqual({
+            "transaction": entity.toJSON(),
+            "bank": "bank"
+        });
     })
 })

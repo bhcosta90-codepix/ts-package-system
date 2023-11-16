@@ -7,13 +7,16 @@ describe("TransactionProcessedEvent Unit Test", () => {
     let entity;
     beforeEach(() => {
         entity = new transaction_entity_1.Transaction.Factory().make();
-        event = new transaction_processed_event_1.TransactionProcessedEvent(entity);
+        event = new transaction_processed_event_1.TransactionProcessedEvent(entity, "bank");
     });
     test("Testing name event", () => {
         expect(event.name()).toBe("transaction.processed");
     });
     test("Testing payload event", () => {
-        expect(event.payload()).toStrictEqual(entity.toJSON());
+        expect(event.payload()).toStrictEqual({
+            "transaction": entity.toJSON(),
+            "bank": "bank"
+        });
     });
 });
 //# sourceMappingURL=transaction-processed.event.spec.js.map
