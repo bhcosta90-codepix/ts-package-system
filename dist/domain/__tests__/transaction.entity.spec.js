@@ -20,6 +20,8 @@ describe("Transaction.Entity Unit Test", () => {
             reference: 'bf48f7e0-8248-11ee-b962-0242ac120002'
         });
         expect(entity).toBeInstanceOf(entity_abstract_1.EntityAbstract);
+        expect(entity.kind).toBe(3);
+        expect(entity.key).toBe("test@test.com");
         expect(entity.toJSON()).toMatchObject({
             pixKey: new pix_key_vo_1.PixKeyValueObject.ValueObject({
                 kind: "email",

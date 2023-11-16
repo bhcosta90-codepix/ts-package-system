@@ -27,6 +27,8 @@ export declare namespace Transaction {
         changeConfirmed(): void;
         changeCompleted(): void;
         get status(): Transaction.Status;
+        get kind(): number;
+        get key(): string;
     }
     class Factory {
         private _kind;
